@@ -13,6 +13,8 @@ import java.util.*;
 
 public class Bot {
     public static void main(String[] args) {
+        // Get token from token.txt
+        // Raise exception if not found
         String token = "";
         try {
             File f = new File("token.txt");
@@ -30,6 +32,9 @@ public class Bot {
         DiscordApi api = new DiscordApiBuilder().setToken(token).setAllIntents().login().join();
         System.out.println("Logged in as " + api.getYourself().getDiscriminatedName());
 
+        // Set bot status to online
+        // Set bot activity to watching a random episode
+        // (Season #) (Episode #): (Title)
         api.updateStatus(UserStatus.ONLINE);
         api.updateActivity(ActivityType.WATCHING, getRandEpisode());
 
@@ -43,14 +48,20 @@ public class Bot {
             JSONObject episodes = (JSONObject) parser.parse(new InputStreamReader(jsonStream, "UTF-8"));
 
             Random rand = new Random();
+            // episodes object has the seasons as keys
+            // Get random key from episodes object
             String season = (String) episodes.keySet().toArray()[rand.nextInt(episodes.keySet().size())];
 
+            // seasonObj contains all episodes in a season
             JSONObject seasonObj = (JSONObject) episodes.get(season);
 
             List<Map.Entry> episodesList = new ArrayList<>();
             episodesList.addAll(seasonObj.entrySet());
 
+            // episodeEntry contains all information for one episode
+            // Formatted as Title: info (JSONObject)
             Map.Entry episodeEntry = episodesList.get(rand.nextInt(episodesList.size()));
+
             String episodeNumber = (String) episodeEntry.getKey();
             JSONObject episodeDetails = (JSONObject) episodeEntry.getValue();
 
