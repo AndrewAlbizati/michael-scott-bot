@@ -10,6 +10,9 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Bot {
     public static void main(String[] args) {
@@ -33,11 +36,19 @@ public class Bot {
         System.out.println("Logged in as " + api.getYourself().getDiscriminatedName());
 
         // Set bot status to online
-        // Set bot activity to watching a random episode
-        // (Season #) (Episode #): (Title)
         api.updateStatus(UserStatus.ONLINE);
-        api.updateActivity(ActivityType.WATCHING, getRandEpisode());
 
+        // Create runnable that runs every 22 minutes
+        // Changes bot activity
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(() -> {
+            // Set bot activity to watching a random episode
+            // (Season #) (Episode #): (Title)
+            api.updateActivity(ActivityType.WATCHING, getRandEpisode());
+        }, 0, 22, TimeUnit.MINUTES);
+
+        // Add message create listener to process commands
+        // And respond to certain messages
         api.addMessageCreateListener(new OnMessage());
     }
 
