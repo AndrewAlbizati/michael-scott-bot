@@ -55,6 +55,7 @@ public class Bot {
 
     private static String getRandEpisode() {
         try {
+            // Episode information stored in episodes.json
             URL url = ClassLoader.getSystemClassLoader().getResource("episodes.json");
             File f = new File(url.getFile());
             InputStream jsonStream = new FileInputStream(f);

@@ -70,6 +70,7 @@ public class OnMessage implements MessageCreateListener {
         // User sends join command
         // Bot joins the voice channel and plays The Office's theme song
         if (message.getContent().equalsIgnoreCase(COMMAND_PREFIX + "join")) {
+            // Return if user isn't in a voice channel
             if (!messageCreateEvent.getMessageAuthor().getConnectedVoiceChannel().isPresent()) {
                 channel.sendMessage("Please join a voice channel.");
                 return;
@@ -77,6 +78,7 @@ public class OnMessage implements MessageCreateListener {
 
             ServerVoiceChannel voiceChannel = messageCreateEvent.getMessageAuthor().getConnectedVoiceChannel().get();
 
+            // Connect to the voice channel
             voiceChannel.connect().thenAccept(audioConnection -> {
                 // Create a player manager
                 AudioPlayerManager playerManager = new DefaultAudioPlayerManager();
@@ -123,6 +125,7 @@ public class OnMessage implements MessageCreateListener {
             }).exceptionally(e -> {
                 // Failed to connect to voice channel (no permissions?)
                 e.printStackTrace();
+                channel.sendMessage("Couldn't connect to <#" + channel.getIdAsString() + "> " + e.getMessage());
                 return null;
             });
         }
@@ -138,9 +141,8 @@ public class OnMessage implements MessageCreateListener {
             JSONArray quotes = (JSONArray) parser.parse(new InputStreamReader(jsonStream, "UTF-8"));
 
             Random rand = new Random();
-            String quote = (String) quotes.get(rand.nextInt(quotes.size()));
 
-            return quote;
+            return (String) quotes.get(rand.nextInt(quotes.size()));
         } catch (IOException | ParseException e) {
             e.printStackTrace();
             return null;

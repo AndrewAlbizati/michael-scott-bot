@@ -1,5 +1,5 @@
 # Michael Scott Bot
-This Discord bot is meant to emulate Michael Scott from the NBC show _The Office_. This bot is written in Java using the Javacord library. To use this bot, please add a "token.txt" file with the bot's token in the same folder as the JAR file. To run the bot, enter ```gradle run``` in a command prompt or terminal in the same directory as the JAR file.
+This Discord bot is meant to emulate Michael Scott from the NBC show _The Office_. This bot is written in Java using the Javacord library. To use this bot, please add a "token.txt" file with the bot's token. To run the bot, enter ```gradle run``` in a command prompt or terminal.
 
 ## Commands
 - **Quote**: Returns a random quote from the show.
@@ -11,4 +11,5 @@ This Discord bot is meant to emulate Michael Scott from the NBC show _The Office
 
 # Dependencies
 - Javacord 3.3.2 (https://github.com/Javacord/Javacord)
+- LavaPlayer 1.3.77 (https://github.com/sedmelluq/lavaplayer)
 - JSONSimple 1.1.1 (https://github.com/fangyidong/json-simple)
