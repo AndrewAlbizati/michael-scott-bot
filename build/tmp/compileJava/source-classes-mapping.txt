@@ -1,8 +1,0 @@
-com/github/AndrewAlbizati/LavaplayerAudioSource.java
- com.github.AndrewAlbizati.LavaplayerAudioSource
-com/github/AndrewAlbizati/OnMessage.java
- com.github.AndrewAlbizati.OnMessage
- com.github.AndrewAlbizati.OnMessage$1
- com.github.AndrewAlbizati.OnMessage$2
-com/github/AndrewAlbizati/Bot.java
- com.github.AndrewAlbizati.Bot
