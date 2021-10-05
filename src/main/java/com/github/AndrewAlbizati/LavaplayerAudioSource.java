@@ -7,16 +7,12 @@ import org.javacord.api.audio.AudioSource;
 import org.javacord.api.audio.AudioSourceBase;
 
 public class LavaplayerAudioSource extends AudioSourceBase {
+    // Code written by Javacord developers
+    // https://javacord.org/wiki/advanced-topics/playing-audio.html#playing-music
 
     private final AudioPlayer audioPlayer;
     private AudioFrame lastFrame;
 
-    /**
-     * Creates a new lavaplayer audio source.
-     *
-     * @param api A discord api instance.
-     * @param audioPlayer An audio player from Lavaplayer.
-     */
     public LavaplayerAudioSource(DiscordApi api, AudioPlayer audioPlayer) {
         super(api);
         this.audioPlayer = audioPlayer;

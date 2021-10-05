@@ -140,6 +140,8 @@ public class OnMessage implements MessageCreateListener {
             JSONParser parser = new JSONParser();
             JSONArray quotes = (JSONArray) parser.parse(new InputStreamReader(jsonStream, "UTF-8"));
 
+            jsonStream.close();
+
             Random rand = new Random();
 
             return (String) quotes.get(rand.nextInt(quotes.size()));

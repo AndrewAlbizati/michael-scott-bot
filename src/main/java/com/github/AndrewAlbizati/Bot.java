@@ -22,12 +22,15 @@ public class Bot {
         String token = "";
         try {
             File f = new File("token.txt");
+            if (f.createNewFile())
+                throw new NullPointerException("Please enter your bot token in token.txt");
+
             Scanner s = new Scanner(f);
             token = s.next();
             s.close();
 
             if (token.length() == 0)
-                throw new NullPointerException();
+                throw new NullPointerException("Token not found!");
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
@@ -62,6 +65,8 @@ public class Bot {
 
             JSONParser parser = new JSONParser();
             JSONObject episodes = (JSONObject) parser.parse(new InputStreamReader(jsonStream, "UTF-8"));
+
+            jsonStream.close();
 
             Random rand = new Random();
             // episodes object has the seasons as keys
